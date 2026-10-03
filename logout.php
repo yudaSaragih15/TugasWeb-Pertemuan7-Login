@@ -1,13 +1,17 @@
 <?php
 session_start();
 
-// Hapus semua variabel session
+// Hapus session
 session_unset();
-
-// Hancurkan session
 session_destroy();
 
-// Alihkan (redirect) pengguna kembali ke halaman login
+// --- BONUS 2: HAPUS COOKIE REMEMBER ME SAAT LOGOUT ---
+// Kita set waktu kadaluarsanya menjadi masa lalu (time() - 3600) agar browser menghapusnya
+if (isset($_COOKIE['remember_email'])) {
+    setcookie('remember_email', '', time() - 3600, "/");
+}
+
+// Redirect ke halaman login
 header("Location: login.php");
 exit;
 ?>
