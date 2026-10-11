@@ -1,7 +1,6 @@
 <?php
 require 'functions.php';
 
-// --- BONUS 2: AUTO LOGIN DENGAN COOKIE ---
 if (!isset($_SESSION['user']) && isset($_COOKIE['remember_email'])) {
     $email_cookie = $_COOKIE['remember_email'];
     $users = getUsers();
@@ -17,7 +16,6 @@ if (!isset($_SESSION['user']) && isset($_COOKIE['remember_email'])) {
     }
 }
 
-// Jika sudah login, langsung lempar ke dashboard
 if (isset($_SESSION['user'])) {
     redirect('dashboard.php');
 }
@@ -42,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ];
                 $loggedIn = true;
 
-                // --- BONUS 2: SET COOKIE JIKA CENTANG REMEMBER ME ---
                 if (isset($_POST['remember'])) {
                     // Cookie berlaku 30 hari (86400 detik * 30)
                     setcookie('remember_email', $email, time() + (86400 * 30), "/");
